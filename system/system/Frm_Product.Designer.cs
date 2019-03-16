@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.cb_provider = new System.Windows.Forms.ComboBox();
             this.lbl_provider = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -41,7 +42,17 @@
             this.btn_register = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_exit = new System.Windows.Forms.Button();
+            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idCategoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idProviderDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idSubCategoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rEFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_provider
@@ -67,8 +78,19 @@
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.Silver;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn,
+            this.descriptionDataGridViewTextBoxColumn,
+            this.priceDataGridViewTextBoxColumn,
+            this.idCategoryDataGridViewTextBoxColumn,
+            this.idProviderDataGridViewTextBoxColumn,
+            this.idSubCategoryDataGridViewTextBoxColumn,
+            this.rEFDataGridViewTextBoxColumn,
+            this.categoryDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.productBindingSource;
             this.dataGridView1.Location = new System.Drawing.Point(43, 260);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -184,6 +206,71 @@
             this.btn_exit.Text = "Exit";
             this.btn_exit.UseVisualStyleBackColor = false;
             // 
+            // productBindingSource
+            // 
+            this.productBindingSource.DataSource = typeof(system.dal.Product);
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            this.descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            this.descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            this.descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            this.descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            this.descriptionDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // priceDataGridViewTextBoxColumn
+            // 
+            this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+            this.priceDataGridViewTextBoxColumn.HeaderText = "Price €";
+            this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+            this.priceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.priceDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // idCategoryDataGridViewTextBoxColumn
+            // 
+            this.idCategoryDataGridViewTextBoxColumn.DataPropertyName = "IdCategory";
+            this.idCategoryDataGridViewTextBoxColumn.HeaderText = "IdCategory";
+            this.idCategoryDataGridViewTextBoxColumn.Name = "idCategoryDataGridViewTextBoxColumn";
+            this.idCategoryDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // idProviderDataGridViewTextBoxColumn
+            // 
+            this.idProviderDataGridViewTextBoxColumn.DataPropertyName = "IdProvider";
+            this.idProviderDataGridViewTextBoxColumn.HeaderText = "IdProvider";
+            this.idProviderDataGridViewTextBoxColumn.Name = "idProviderDataGridViewTextBoxColumn";
+            this.idProviderDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idProviderDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // idSubCategoryDataGridViewTextBoxColumn
+            // 
+            this.idSubCategoryDataGridViewTextBoxColumn.DataPropertyName = "IdSubCategory";
+            this.idSubCategoryDataGridViewTextBoxColumn.HeaderText = "IdSubCategory";
+            this.idSubCategoryDataGridViewTextBoxColumn.Name = "idSubCategoryDataGridViewTextBoxColumn";
+            this.idSubCategoryDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idSubCategoryDataGridViewTextBoxColumn.Width = 50;
+            // 
+            // rEFDataGridViewTextBoxColumn
+            // 
+            this.rEFDataGridViewTextBoxColumn.DataPropertyName = "REF";
+            this.rEFDataGridViewTextBoxColumn.HeaderText = "REF";
+            this.rEFDataGridViewTextBoxColumn.Name = "rEFDataGridViewTextBoxColumn";
+            this.rEFDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // categoryDataGridViewTextBoxColumn
+            // 
+            this.categoryDataGridViewTextBoxColumn.DataPropertyName = "Category";
+            this.categoryDataGridViewTextBoxColumn.HeaderText = "Category";
+            this.categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
+            this.categoryDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // Frm_Product
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -206,7 +293,9 @@
             this.Name = "Frm_Product";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Product";
+            this.Load += new System.EventHandler(this.Frm_Product_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -227,5 +316,14 @@
         private System.Windows.Forms.Button btn_register;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_exit;
+        private System.Windows.Forms.BindingSource productBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idCategoryDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idProviderDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idSubCategoryDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rEFDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn categoryDataGridViewTextBoxColumn;
     }
 }
