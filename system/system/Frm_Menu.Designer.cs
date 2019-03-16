@@ -45,7 +45,7 @@
             this.insertToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(852, 31);
+            this.menuStrip1.Size = new System.Drawing.Size(1027, 31);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -118,7 +118,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(852, 479);
+            this.ClientSize = new System.Drawing.Size(1027, 536);
             this.Controls.Add(this.btn_category);
             this.Controls.Add(this.btn_product);
             this.Controls.Add(this.menuStrip1);
