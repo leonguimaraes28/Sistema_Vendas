@@ -22,5 +22,15 @@ namespace system
         {
             this.productBindingSource.DataSource = dataContextFactory.DataContext.Products;
         }
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            this.productBindingSource.CancelEdit();
+        }
+
+        private void btn_new_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

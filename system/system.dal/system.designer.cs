@@ -36,6 +36,9 @@ namespace system.dal
     partial void InsertProduct(Product instance);
     partial void UpdateProduct(Product instance);
     partial void DeleteProduct(Product instance);
+    partial void InsertSubcategory(Subcategory instance);
+    partial void UpdateSubcategory(Subcategory instance);
+    partial void DeleteSubcategory(Subcategory instance);
     #endregion
 		
 		public systemDataContext() : 
@@ -83,6 +86,14 @@ namespace system.dal
 				return this.GetTable<Product>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Subcategory> Subcategories
+		{
+			get
+			{
+				return this.GetTable<Subcategory>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_category")]
@@ -91,7 +102,7 @@ namespace system.dal
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private int _IdCategory;
 		
 		private string _Description;
 		
@@ -103,12 +114,15 @@ namespace system.dal
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
+    partial void OnIdCategoryChanging(int value);
+    partial void OnIdCategoryChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
     partial void OnSubCategoryChanging(string value);
-    partial void OnSubCategoryChanged();
+
+       
+
+        partial void OnSubCategoryChanged();
     #endregion
 		
 		public Category()
@@ -117,22 +131,22 @@ namespace system.dal
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="id_category", Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="id_category", Storage="_IdCategory", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdCategory
 		{
 			get
 			{
-				return this._Id;
+				return this._IdCategory;
 			}
 			set
 			{
-				if ((this._Id != value))
+				if ((this._IdCategory != value))
 				{
-					this.OnIdChanging(value);
+					this.OnIdCategoryChanging(value);
 					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this._IdCategory = value;
+					this.SendPropertyChanged("IdCategory");
+					this.OnIdCategoryChanged();
 				}
 			}
 		}
@@ -177,7 +191,7 @@ namespace system.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb_category_tb_product", Storage="_Products", ThisKey="Id", OtherKey="IdCategory")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb_category_tb_product", Storage="_Products", ThisKey="IdCategory", OtherKey="IdCategory")]
 		public EntitySet<Product> Products
 		{
 			get
@@ -229,7 +243,7 @@ namespace system.dal
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private int _IdProduct;
 		
 		private string _Description;
 		
@@ -249,8 +263,8 @@ namespace system.dal
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
+    partial void OnIdProductChanging(int value);
+    partial void OnIdProductChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
     partial void OnPriceChanging(decimal value);
@@ -271,22 +285,22 @@ namespace system.dal
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="id_product", Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="id_product", Storage="_IdProduct", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IdProduct
 		{
 			get
 			{
-				return this._Id;
+				return this._IdProduct;
 			}
 			set
 			{
-				if ((this._Id != value))
+				if ((this._IdProduct != value))
 				{
-					this.OnIdChanging(value);
+					this.OnIdProductChanging(value);
 					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
+					this._IdProduct = value;
+					this.SendPropertyChanged("IdProduct");
+					this.OnIdProductChanged();
 				}
 			}
 		}
@@ -411,7 +425,7 @@ namespace system.dal
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb_category_tb_product", Storage="_Category", ThisKey="IdCategory", OtherKey="Id", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tb_category_tb_product", Storage="_Category", ThisKey="IdCategory", OtherKey="IdCategory", IsForeignKey=true)]
 		public Category Category
 		{
 			get
@@ -434,13 +448,99 @@ namespace system.dal
 					if ((value != null))
 					{
 						value.Products.Add(this);
-						this._IdCategory = value.Id;
+						this._IdCategory = value.IdCategory;
 					}
 					else
 					{
 						this._IdCategory = default(int);
 					}
 					this.SendPropertyChanged("Category");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tb_subcategory")]
+	public partial class Subcategory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_subcategory;
+		
+		private string _subcategory_description;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_subcategoryChanging(int value);
+    partial void Onid_subcategoryChanged();
+    partial void Onsubcategory_descriptionChanging(string value);
+    partial void Onsubcategory_descriptionChanged();
+    #endregion
+		
+		public Subcategory()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_subcategory", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_subcategory
+		{
+			get
+			{
+				return this._id_subcategory;
+			}
+			set
+			{
+				if ((this._id_subcategory != value))
+				{
+					this.Onid_subcategoryChanging(value);
+					this.SendPropertyChanging();
+					this._id_subcategory = value;
+					this.SendPropertyChanged("id_subcategory");
+					this.Onid_subcategoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_subcategory_description", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string subcategory_description
+		{
+			get
+			{
+				return this._subcategory_description;
+			}
+			set
+			{
+				if ((this._subcategory_description != value))
+				{
+					this.Onsubcategory_descriptionChanging(value);
+					this.SendPropertyChanging();
+					this._subcategory_description = value;
+					this.SendPropertyChanged("subcategory_description");
+					this.Onsubcategory_descriptionChanged();
 				}
 			}
 		}

@@ -2,22 +2,28 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=LAPTOP-E6DMLRUT\MSSQLSEVER;Initial Catalog=Sales_System;Integrated Security=True" SettingsObjectName="system.dal.Properties.Settings" SettingsPropertyName="Sales_SystemConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tb_category" Member="Categories">
     <Type Name="Category">
-      <Column Name="id_category" Member="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_category" Member="IdCategory" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="description_category" Member="Description" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="sub_category" Member="SubCategory" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="tb_category_tb_product" Member="Products" ThisKey="Id" OtherKey="IdCategory" Type="Product" />
+      <Association Name="tb_category_tb_product" Member="Products" ThisKey="IdCategory" OtherKey="IdCategory" Type="Product" />
     </Type>
   </Table>
   <Table Name="dbo.tb_product" Member="Products">
     <Type Name="Product">
-      <Column Name="id_product" Member="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_product" Member="IdProduct" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="description_product" Member="Description" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
       <Column Name="price" Member="Price" Type="System.Decimal" DbType="Decimal(25,2) NOT NULL" CanBeNull="false" />
       <Column Name="id_category" Member="IdCategory" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="id_provider" Member="IdProvider" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="id_sub_category" Member="IdSubCategory" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="REF" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Association Name="tb_category_tb_product" Member="Category" ThisKey="IdCategory" OtherKey="Id" Type="Category" IsForeignKey="true" />
+      <Association Name="tb_category_tb_product" Member="Category" ThisKey="IdCategory" OtherKey="IdCategory" Type="Category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tb_subcategory" Member="Subcategories">
+    <Type Name="Subcategory">
+      <Column Name="id_subcategory" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="subcategory_description" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>

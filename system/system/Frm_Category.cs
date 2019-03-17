@@ -36,19 +36,24 @@ namespace system
             {
                 this.categoryBindingSource.EndEdit();
                 dataContextFactory.DataContext.SubmitChanges();
-                MessageBox.Show("Category has been registered");
+                MessageBox.Show("Category has been registered","Registered", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
 
-            if (DialogResult.Yes == MessageBox.Show("Do You Want Delete this Category?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
+            if (DialogResult.Yes == MessageBox.Show("Delete the Category "+selectedCategoryName.ToString()+"?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
             {
-                this.categoryBindingSource.RemoveCurrent();
-                dataContextFactory.DataContext.SubmitChanges();
-
-                //COMO DELETAR SEM OS CONFLITOS DE CHAVES ESTRANGEIRAS????
+                if (this.categoryHasProducts(getCategory))//verifica se a categoria selecionada tem produtos associados
+                    MessageBox.Show("Category cannot be removed, since it has been associated to products", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    this.categoryBindingSource.RemoveCurrent();
+                    dataContextFactory.DataContext.SubmitChanges();
+                    MessageBox.Show("Category has been removed!","Confirmation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
 
@@ -64,6 +69,43 @@ namespace system
             }
         }
 
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            this.categoryBindingSource.CancelEdit();
+        }
+
+        public Category getCategory
+        {
+            get
+            {
+                return (Category)this.categoryBindingSource.Current;//retorna a categoria selecionada
+            }
+        }
+
+        private bool categoryHasProducts(Category ctg)//metodo que verifica se a categoria atual possui produtos associados
+        {
+            var getProducts = dataContextFactory.DataContext.Products.Where(x => x.IdCategory == ctg.IdCategory);
+            if (getProducts.Count() > 0)
+                return true;
+            else
+                return false;
+        }
+
+       public override string ToString()//sem o override ToString() a classe aparece como "system.dal.Category"
+        {
+            return base.ToString();
+        }
+
+
+        public Category selectedCategoryName
+        {
+            get
+            {
+
+                return (Category)this.categoryBindingSource.Current;//retorna a categoria selecionada
+            }
+        }
 
     }
+
 }

@@ -42,8 +42,6 @@
             this.btn_register = new System.Windows.Forms.Button();
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_exit = new System.Windows.Forms.Button();
-            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descriptionDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idCategoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +49,7 @@
             this.idSubCategoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rEFDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.categoryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -82,7 +81,6 @@
             this.dataGridView1.BackgroundColor = System.Drawing.Color.Silver;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
             this.descriptionDataGridViewTextBoxColumn,
             this.priceDataGridViewTextBoxColumn,
             this.idCategoryDataGridViewTextBoxColumn,
@@ -111,6 +109,7 @@
             this.btn_new.TabIndex = 21;
             this.btn_new.Text = "New Product";
             this.btn_new.UseVisualStyleBackColor = false;
+            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
             // 
             // cb_category
             // 
@@ -205,18 +204,7 @@
             this.btn_exit.TabIndex = 29;
             this.btn_exit.Text = "Exit";
             this.btn_exit.UseVisualStyleBackColor = false;
-            // 
-            // productBindingSource
-            // 
-            this.productBindingSource.DataSource = typeof(system.dal.Product);
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Width = 50;
+            this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
             // descriptionDataGridViewTextBoxColumn
             // 
@@ -270,6 +258,10 @@
             this.categoryDataGridViewTextBoxColumn.HeaderText = "Category";
             this.categoryDataGridViewTextBoxColumn.Name = "categoryDataGridViewTextBoxColumn";
             this.categoryDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // productBindingSource
+            // 
+            this.productBindingSource.DataSource = typeof(system.dal.Product);
             // 
             // Frm_Product
             // 
